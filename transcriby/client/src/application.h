@@ -6,6 +6,9 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "core/playlist.h"
+#include "ui/panels/playlist.h"
+
 namespace transcriby {
 	class Application {
 	public:
@@ -19,8 +22,10 @@ namespace transcriby {
 	private:
 		int _frame_rate = 60;
 		sf::Vector2u _resolution = { 800, 600 };
-
 		std::unique_ptr<sf::RenderWindow> _window;
+	private:
+		Playlist _playlist;
+		std::unique_ptr<ui::PlaylistPanel> _playlist_panel;
 	};
 }
 

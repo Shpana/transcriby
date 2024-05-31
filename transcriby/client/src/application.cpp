@@ -22,6 +22,13 @@ namespace transcriby {
 	}
 	
 	Application::Application(const std::string& title) {
+		{
+			_playlist = {
+				{ "C:\\Dev\\transcriby\\assets\\audio\\1.mp3" },
+				{ "C:\\Dev\\transcriby\\assets\\audio\\2.mp3" }
+			};
+			_playlist_panel = std::make_unique<ui::PlaylistPanel>(ui::PlaylistPanel(_playlist));
+		}
 		_window = std::make_unique<sf::RenderWindow>(
 			sf::VideoMode(_resolution.x, _resolution.y), title
 		);
@@ -34,6 +41,7 @@ namespace transcriby {
 		ImGui::SFML::Update(*_window, clock.restart());
 		{
 			_handle_dockspace([&]() {
+				_playlist_panel->on_render();
 			});
 		}
 		_window->clear();
