@@ -14,9 +14,14 @@ for_include["imgui"] = "%{wks.location}/transcriby/client/vendor/imgui"
 for_include["imgui-filebrowser"] = "%{wks.location}/transcriby/client/vendor/imgui-filebrowser"
 for_include["imgui-sfml"] = "%{wks.location}/transcriby/client/vendor/imgui-sfml"
 for_include["sfml"] = "%{wks.location}/transcriby/client/vendor/sfml/include"
+for_include["irrklang"] = "%{wks.location}/transcriby/client/vendor/irrklang/include"
 
 libs = {}
 libs["sfml"] = "%{wks.location}/transcriby/client/vendor/sfml/lib"
+libs["irrklang"] = "%{wks.location}/transcriby/client/vendor/irrklang/lib"
+
+bins = {} 
+bins["irrklang"] = "%{wks.location}/transcriby/client/vendor/irrklang/bin"
 
 group "dependencies"
     include "transcriby/client/vendor/imgui"

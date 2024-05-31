@@ -38,8 +38,8 @@ namespace transcriby::ui {
 	}
 
 	void PlaylistPanel::pop_track(int id) {
-		if (_selected == id)
-			_selected = -1;
+		if (_selected_id == id)
+			_selected_id = -1;
 		_playlist->erase(_playlist->begin() + id);
 	}
 
@@ -54,8 +54,8 @@ namespace transcriby::ui {
 			ImGui::PushID(id);
 			std::string track_name = _playlist->at(id).filename().string();
 
-			if (ImGui::Selectable(track_name.c_str(), _selected == id)) {
-				_selected = (_selected == id) ? -1 : id;
+			if (ImGui::Selectable(track_name.c_str(), _selected_id == id)) {
+				_selected_id = (_selected_id == id) ? -1 : id;
 			}
 
 			_show_track_manipulation_popup(id);

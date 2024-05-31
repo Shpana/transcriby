@@ -18,19 +18,17 @@ project "client"
         for_include["imgui-filebrowser"],
         for_include["imgui-sfml"],
         for_include["sfml"],
+        for_include["irrklang"],
     }
 
     links {
         "imgui",
         "imgui-sfml",
-
-        "opengl32",
-        "winmm",
-        "freetype",
     }
 
     libdirs {
         libs["sfml"],
+        libs["irrklang"],
     }
 
     defines {
@@ -40,6 +38,18 @@ project "client"
     filter "system:windows"
         cppdialect "C++17"
         systemversion "latest"
+        
+        links {
+            "opengl32",
+            "winmm",
+            "freetype",           
+
+            "Winx64-visualStudio/irrklang.lib",
+        }
+
+        postbuildcommands {
+            "{COPYFILE} %[%{bins['irrklang']}/Winx64-visualStudio/*.dll] %[%{!cfg.targetdir}]" 
+        }
 
     filter {"system:windows", "configurations:Debug"}
 		runtime "Debug"

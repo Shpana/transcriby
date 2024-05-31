@@ -8,6 +8,7 @@
 
 #include "core/playlist.h"
 #include "ui/panels/playlist.h"
+#include "ui/panels/player.h"
 
 namespace transcriby {
 	class Application {
@@ -24,7 +25,8 @@ namespace transcriby {
 		sf::Vector2u _resolution = { 800, 600 };
 		std::unique_ptr<sf::RenderWindow> _window;
 	private:
-		std::unique_ptr<ui::PlaylistPanel> _playlist_panel;
+		std::shared_ptr<ui::PlaylistPanel> _playlist_panel;
+		std::shared_ptr<ui::PlayerPanel> _player_panel;
 	};
 }
 
