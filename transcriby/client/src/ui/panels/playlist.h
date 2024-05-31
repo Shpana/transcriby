@@ -7,10 +7,20 @@
 namespace transcriby::ui {
 	class PlaylistPanel {
 	public:
-		PlaylistPanel(const Playlist& handle);
+		PlaylistPanel();
 		void on_render();
+
+		void add_track(const TrackSource& track);
+		void pop_track(int id);
+
+		int get_selected() { return _selected; }
+		const Playlist& get_content() { return *_playlist.get(); }
 	private:
-		std::shared_ptr<Playlist> _handle;
+		void _show_tracks();
+		void _show_track_manipulation_popup(int id);
+	private:
+		int _selected = -1;
+		std::unique_ptr<Playlist> _playlist;
 	};
 }
 

@@ -23,11 +23,10 @@ namespace transcriby {
 	
 	Application::Application(const std::string& title) {
 		{
-			_playlist = {
-				{ "C:\\Dev\\transcriby\\assets\\audio\\1.mp3" },
-				{ "C:\\Dev\\transcriby\\assets\\audio\\2.mp3" }
-			};
-			_playlist_panel = std::make_unique<ui::PlaylistPanel>(ui::PlaylistPanel(_playlist));
+			_playlist_panel = std::make_unique<ui::PlaylistPanel>();
+			_playlist_panel->add_track("C:\\Dev\\transcriby\\assets\\audio\\1.mp3");
+			_playlist_panel->add_track("C:\\Dev\\transcriby\\assets\\audio\\2.mp3");
+			_playlist_panel->add_track("C:\\Dev\\transcriby\\assets\\audio\\3.mp3");
 		}
 		_window = std::make_unique<sf::RenderWindow>(
 			sf::VideoMode(_resolution.x, _resolution.y), title
@@ -42,6 +41,8 @@ namespace transcriby {
 		{
 			_handle_dockspace([&]() {
 				_playlist_panel->on_render();
+
+				ImGui::ShowDemoWindow();
 			});
 		}
 		_window->clear();

@@ -4,10 +4,8 @@
 #include <filesystem>
 
 namespace transcriby {
-	struct Track {
-		std::filesystem::path source;
-	};
+	using TrackSource = std::filesystem::path;
 
-	using Playlist = std::vector<Track>;
+	using Playlist = std::vector<TrackSource>;
 }
 

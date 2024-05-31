@@ -24,7 +24,6 @@ namespace transcriby {
 		sf::Vector2u _resolution = { 800, 600 };
 		std::unique_ptr<sf::RenderWindow> _window;
 	private:
-		Playlist _playlist;
 		std::unique_ptr<ui::PlaylistPanel> _playlist_panel;
 	};
 }
