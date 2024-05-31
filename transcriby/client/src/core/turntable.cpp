@@ -31,5 +31,27 @@ namespace transcriby {
 		if (_sound)
 			_sound->setIsPaused(true);
 	}
+
+	void Turntable::set_volume(float volume) {
+		if (_sound)
+			_sound->setVolume(volume);
+	}
+
+	void Turntable::set_speed(float speed) {
+		if (_sound)
+			_sound->setPlaybackSpeed(speed);
+	}
+
+	void Turntable::set_positioin(float position) {
+		_sound->setPlayPosition((int)(position * get_length()));
+	}
+
+	int Turntable::get_position() {
+		return _sound->getPlayPosition();
+	}
+
+	int Turntable::get_length() {
+		return _sound->getPlayLength();
+	}
 }
 

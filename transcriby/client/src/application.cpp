@@ -23,8 +23,8 @@ namespace transcriby {
 	
 	Application::Application(const std::string& title) {
 		_playlist_panel = std::make_shared<ui::PlaylistPanel>();
-		_playlist_panel->add_track("C:/Dev/transcriby/assets/audio/1.mp3");
-		_playlist_panel->add_track("C:/Dev/transcriby/assets/audio/2.mp3");
+		_playlist_panel->add_track("C:/Dev/transcriby/transcriby/client/assets/audio/1.mp3");
+		_playlist_panel->add_track("C:/Dev/transcriby/transcriby/client/assets/audio/2.mp3");
 
 		_player_panel = std::make_shared<ui::PlayerPanel>(_playlist_panel);
 
