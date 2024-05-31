@@ -41,8 +41,6 @@ namespace transcriby {
 		{
 			_handle_dockspace([&]() {
 				_playlist_panel->on_render();
-
-				ImGui::ShowDemoWindow();
 			});
 		}
 		_window->clear();

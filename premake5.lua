@@ -11,6 +11,7 @@ output_dir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 for_include = {}
 for_include["imgui"] = "%{wks.location}/transcriby/client/vendor/imgui"
+for_include["imgui-filebrowser"] = "%{wks.location}/transcriby/client/vendor/imgui-filebrowser"
 for_include["imgui-sfml"] = "%{wks.location}/transcriby/client/vendor/imgui-sfml"
 for_include["sfml"] = "%{wks.location}/transcriby/client/vendor/sfml/include"
 

@@ -15,6 +15,7 @@ project "client"
         "src/",
 
         for_include["imgui"],
+        for_include["imgui-filebrowser"],
         for_include["imgui-sfml"],
         for_include["sfml"],
     }
