@@ -5,19 +5,19 @@
 
 namespace transcriby {
 	Application::Application(const std::string& title) {
-		_playlist.add("C:/Dev/transcriby/transcriby/client/assets/audio/1.mp3");
-		_playlist.add("C:/Dev/transcriby/transcriby/client/assets/audio/2.mp3");
-
-		_playlist_panel = std::make_shared<ui::PlaylistPanel>(_playlist);
-		_player_panel = std::make_shared<ui::PlayerPanel>(_playlist);
-
 		_window = std::make_unique<sf::RenderWindow>(
 			sf::VideoMode(_resolution.x, _resolution.y), title
 		);
+
+		_playlist.add("C:/Dev/transcriby/transcriby/client/assets/audio/1.mp3");
+		_playlist.add("C:/Dev/transcriby/transcriby/client/assets/audio/2.mp3");
+
+		_playlist_panel = std::make_unique<ui::PlaylistPanel>(_playlist);
+		_player_panel = std::make_unique<ui::PlayerPanel>(_playlist);
+		_transcribe_panel = std::make_unique<ui::TranscribePanel>(_playlist);
 	}
 
-	Application::~Application() {
-	}
+	Application::~Application() {}
 
 	void Application::run() {
 		_window->setFramerateLimit(_frame_rate);
@@ -42,6 +42,7 @@ namespace transcriby {
 			_handle_dockspace([&]() {
 				_playlist_panel->on_render();
 				_player_panel->on_render();
+				_transcribe_panel->on_render();
 			});
 		}
 		_window->clear();

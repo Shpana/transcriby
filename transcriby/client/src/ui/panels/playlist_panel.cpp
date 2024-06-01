@@ -3,15 +3,14 @@
 #include <algorithm>	
 
 #include "imgui.h"
-#include "imgui-SFML.h"
 
 #include "ui/primitives.h"
 
 namespace transcriby::ui {
 	PlaylistPanel::PlaylistPanel(Playlist& playlist)
 		: _playlist(playlist) {
-		_add_file_dialog.SetTitle("Choose file...");
-		_add_file_dialog.SetTypeFilters({ ".mp3" });
+		_add_track_dialog.SetTitle("Choose file...");
+		_add_track_dialog.SetTypeFilters({ ".mp3" });
 	}
 
 	void PlaylistPanel::on_render() {
@@ -23,17 +22,17 @@ namespace transcriby::ui {
 			ImGui::End();
 		}
 		{
-			_add_file_dialog.Display();
-			if (_add_file_dialog.HasSelected()) {
-				_playlist.add(_add_file_dialog.GetSelected());
-				_add_file_dialog.ClearSelected();
+			_add_track_dialog.Display();
+			if (_add_track_dialog.HasSelected()) {
+				_playlist.add(_add_track_dialog.GetSelected());
+				_add_track_dialog.ClearSelected();
 			}
 		}
 	}
 
 	void PlaylistPanel::_show_add_track_dialog() {
 		if (standart_button("Add Track")) {
-			_add_file_dialog.Open();
+			_add_track_dialog.Open();
 		}
 	}
 

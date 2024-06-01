@@ -19,7 +19,7 @@ namespace transcriby::ui {
 		void _show_track_manipulation_popup(uint id);
 	private:
 		Playlist& _playlist;
-		ImGui::FileBrowser _add_file_dialog;
+		ImGui::FileBrowser _add_track_dialog;
 	};
 }
 
