@@ -7,15 +7,15 @@
 #include <SFML/Graphics.hpp>
 
 #include "core/playlist.h"
-#include "ui/panels/playlist.h"
-#include "ui/panels/player.h"
+#include "ui/panels/playlist_panel.h"
+#include "ui/panels/player_panel.h"
 
 namespace transcriby {
 	class Application {
 	public:
-		void run();
 		Application(const std::string& title);
 		~Application();
+		void run();
 	private:
 		void _on_update(sf::Clock& clock);
 		void _handle_events();
@@ -25,6 +25,7 @@ namespace transcriby {
 		sf::Vector2u _resolution = { 800, 600 };
 		std::unique_ptr<sf::RenderWindow> _window;
 	private:
+		Playlist _playlist;
 		std::shared_ptr<ui::PlaylistPanel> _playlist_panel;
 		std::shared_ptr<ui::PlayerPanel> _player_panel;
 	};
