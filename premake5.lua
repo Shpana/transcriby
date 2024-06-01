@@ -23,6 +23,10 @@ libs["irrklang"] = "%{wks.location}/transcriby/client/vendor/irrklang/lib"
 bins = {} 
 bins["irrklang"] = "%{wks.location}/transcriby/client/vendor/irrklang/bin"
 
+-- Visual Studio PDB files
+pdbs = {}
+pdbs["sfml"] = "%{wks.location}/transcriby/client/vendor/sfml/lib/Debug"
+
 group "dependencies"
     include "transcriby/client/vendor/imgui"
     include "transcriby/client/vendor/imgui-sfml"

@@ -43,12 +43,12 @@ project "client"
             "opengl32",
             "winmm",
             "freetype",           
-
             "Winx64-visualStudio/irrklang.lib",
         }
 
         postbuildcommands {
-            "{COPYFILE} %[%{bins['irrklang']}/Winx64-visualStudio/*.dll] %[%{!cfg.targetdir}]" 
+            "{COPYFILE} %[%{bins['irrklang']}/Winx64-visualStudio/*.dll] %[%{!cfg.targetdir}]",
+            "{COPYFILE} %[%{pdbs['sfml']}/*.pdb] %[%{!cfg.objdir}]",
         }
 
     filter {"system:windows", "configurations:Debug"}
