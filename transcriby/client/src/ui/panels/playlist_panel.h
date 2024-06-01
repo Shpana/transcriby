@@ -6,13 +6,13 @@
 #include "imfilebrowser.h"
 
 #include "core/playlist.h"
+#include "ui/panels/ipanel.h"
 
 namespace transcriby::ui {
-	class PlaylistPanel {
-		using uint = uint64_t;
+	class PlaylistPanel : public IPanel {
 	public:
 		PlaylistPanel(Playlist& playlist);
-		void on_render();
+		void on_render() override;
 	private:
 		void _show_tracks();
 		void _show_add_track_dialog();
