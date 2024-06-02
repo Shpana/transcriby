@@ -10,7 +10,7 @@ namespace transcriby::ui {
 	PlaylistPanel::PlaylistPanel(Playlist& playlist)
 		: _playlist(playlist) {
 		_add_track_dialog.SetTitle("Choose file...");
-		_add_track_dialog.SetTypeFilters({ ".mp3" });
+		_add_track_dialog.SetTypeFilters({ ".mp3", ".m4a"});
 	}
 
 	void PlaylistPanel::on_render() {

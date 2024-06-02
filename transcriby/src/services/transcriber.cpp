@@ -1,14 +1,21 @@
 #include "transcriber.h"
 
-#include <iostream>
+#include <assert.h>
 
 #include "cpr/cpr.h"
 
 namespace transcriby {
-	TranscriberService::TranscriberService() {
-		cpr::Response response = 
-			cpr::Post(cpr::Url{_service_url}, 
-				cpr::Multipart{{ "passage", cpr::File("C:\\Dev\\transcriby\\transcriby\\assets\\audio\\1.mp3")}});
-		std::cout << response.status_code << std::endl;
+	TranscriberService::TranscriberService() {}
+
+	std::string TranscriberService::translate_track(const TrackSource& track) {
+		cpr::Response response = cpr::Post(
+			cpr::Url(_service_url), 
+			cpr::Multipart{ {"passage", cpr::File{track.string()}} });
+
+		if (response.status_code == 200)
+			return response.text;
+		else
+			assert(false);
 	}
 }
+

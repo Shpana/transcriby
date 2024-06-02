@@ -28,7 +28,6 @@ namespace transcriby {
 		std::unique_ptr<sf::RenderWindow> _window;
 
 		Playlist _playlist;
-		TranscriberService _transcriber;
 		std::unique_ptr<ui::PlaylistPanel> _playlist_panel;
 		std::unique_ptr<ui::PlayerPanel> _player_panel;
 		std::unique_ptr<ui::TranscribePanel> _transcribe_panel;
