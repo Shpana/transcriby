@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "core/playlist.h"
+#include "services/transcriber.h"
 #include "ui/panels/playlist_panel.h"
 #include "ui/panels/player_panel.h"
 #include "ui/panels/transcribe_panel.h"
@@ -27,6 +28,7 @@ namespace transcriby {
 		std::unique_ptr<sf::RenderWindow> _window;
 
 		Playlist _playlist;
+		TranscriberService _transcriber;
 		std::unique_ptr<ui::PlaylistPanel> _playlist_panel;
 		std::unique_ptr<ui::PlayerPanel> _player_panel;
 		std::unique_ptr<ui::TranscribePanel> _transcribe_panel;
