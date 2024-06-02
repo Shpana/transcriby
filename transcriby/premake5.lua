@@ -1,4 +1,4 @@
-project "client"
+project "transcriby"
     kind "ConsoleApp"
     language "C++"
     staticruntime "Off"
