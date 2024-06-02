@@ -1,10 +1,16 @@
 #include "application.h"
 
+#include <iostream>
+
+#include "cpr/cpr.h"
 #include "imgui.h"
 #include "imgui-SFML.h"
 
 namespace transcriby {
 	Application::Application(const std::string& title) {
+		cpr::Response response = cpr::Get(cpr::Url("https://google.com"));
+		std::cout << response.status_code << std::endl;
+
 		_window = std::make_unique<sf::RenderWindow>(
 			sf::VideoMode(_resolution.x, _resolution.y), title
 		);

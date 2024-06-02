@@ -14,6 +14,8 @@ project "client"
     includedirs {
         "src/",
 
+        for_include["curl"],
+        for_include["cpr"],
         for_include["imgui"],
         for_include["imgui-filebrowser"],
         for_include["imgui-sfml"],
@@ -22,6 +24,7 @@ project "client"
     }
 
     links {
+        "cpr",
         "imgui",
         "imgui-sfml",
     }
