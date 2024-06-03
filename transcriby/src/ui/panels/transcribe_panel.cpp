@@ -11,12 +11,12 @@ namespace transcriby::ui {
 		: _playlist(playlist) {}
 
 	void TranscribePanel::on_render() {
-		ImGui::Begin("Transcribe");
+		ImGui::Begin(u8"Расшифровщик");
 
 		if (_playlist.has_selected()) {
 			auto selected = _playlist.get_selected();
 
-			if (ImGui::Button("Transcribe"))
+			if (ImGui::Button(u8"Расшифровать"))
 				_transcriber_task =
 					std::async(std::launch::async, [=]() {
 						return _transcriber.translate_track(selected);

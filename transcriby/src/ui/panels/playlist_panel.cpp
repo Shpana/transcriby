@@ -9,13 +9,13 @@
 namespace transcriby::ui {
 	PlaylistPanel::PlaylistPanel(Playlist& playlist)
 		: _playlist(playlist) {
-		_add_track_dialog.SetTitle("Choose file...");
+		_add_track_dialog.SetTitle(u8"Выберите файл");
 		_add_track_dialog.SetTypeFilters({ ".mp3", ".m4a"});
 	}
 
 	void PlaylistPanel::on_render() {
 		{
-			ImGui::Begin("Playlist");
+			ImGui::Begin(u8"Плейлист");
 			_show_tracks();
 			ImGui::Separator();
 			_show_add_track_dialog();
@@ -31,7 +31,7 @@ namespace transcriby::ui {
 	}
 
 	void PlaylistPanel::_show_add_track_dialog() {
-		if (standart_button("Add Track")) {
+		if (standart_button(u8"Добавить трек")) {
 			_add_track_dialog.Open();
 		}
 	}
@@ -56,8 +56,8 @@ namespace transcriby::ui {
 
 	void PlaylistPanel::_show_track_manipulation_popup(uint id) {
 		if (ImGui::BeginPopupContextItem("track_manipulation")) {
-			ImGui::SeparatorText("Actions");
-			if (standart_button("Remove")) {
+			ImGui::SeparatorText(u8"Действия");
+			if (standart_button(u8"Убрать")) {
 				_playlist.remove(id);
 				ImGui::CloseCurrentPopup();
 			}

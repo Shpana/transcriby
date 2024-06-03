@@ -52,8 +52,6 @@ namespace transcriby {
 				_playlist_panel->on_render();
 				_player_panel->on_render();
 				_transcribe_panel->on_render();
-
-				ImGui::ShowDemoWindow();
 			});
 		}
 		ImGui::PopFont();
