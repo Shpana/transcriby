@@ -25,6 +25,8 @@ namespace transcriby {
 	private:
 		int _frame_rate = 60;
 		sf::Vector2u _resolution = { 800, 600 };
+
+		ImFont* _font;
 		std::unique_ptr<sf::RenderWindow> _window;
 
 		Playlist _playlist;

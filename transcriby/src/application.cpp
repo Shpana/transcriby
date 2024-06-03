@@ -24,12 +24,17 @@ namespace transcriby {
 
 	void Application::run() {
 		_window->setFramerateLimit(_frame_rate);
+		_window->resetGLStates();
 
 		ImGui::SFML::Init(*_window);
 		{
+			ImGui::CreateContext();
 			ImGuiIO& io = ImGui::GetIO();
 			io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-			
+			_font = io.Fonts->AddFontFromFileTTF(
+				"assets/fonts/JetBrainsMono-Regular.ttf", 16.0f, nullptr, io.Fonts->GetGlyphRangesCyrillic());
+			ImGui::SFML::UpdateFontTexture();
+
 			sf::Clock clock;
 			while (_window->isOpen()) {
 				_handle_events();
@@ -41,13 +46,17 @@ namespace transcriby {
 
 	void Application::_on_update(sf::Clock& clock) {
 		ImGui::SFML::Update(*_window, clock.restart());
+		ImGui::PushFont(_font);
 		{
 			_handle_dockspace([&]() {
 				_playlist_panel->on_render();
 				_player_panel->on_render();
 				_transcribe_panel->on_render();
+
+				ImGui::ShowDemoWindow();
 			});
 		}
+		ImGui::PopFont();
 		_window->clear();
 		ImGui::SFML::Render(*_window);
 		_window->display();
@@ -95,7 +104,6 @@ namespace transcriby {
 			ImGuiID dockspace_id = ImGui::GetID("DockSpace");
 			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 		}
-
 		hook();
 		ImGui::End();
 	}

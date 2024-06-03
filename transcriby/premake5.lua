@@ -51,7 +51,6 @@ project "transcriby"
 
         postbuildcommands {
             "{COPYFILE} %[%{bins['irrklang']}/Winx64-visualStudio/*.dll] %[%{!cfg.targetdir}]",
-            "{COPYFILE} %[%{pdbs['sfml']}/*.pdb] %[%{!cfg.objdir}]",
         }
 
     filter {"system:windows", "configurations:Debug"}
@@ -62,6 +61,10 @@ project "transcriby"
             "sfml-graphics-s-d.lib",
             "sfml-window-s-d.lib",
             "sfml-system-s-d.lib",
+        }
+
+        postbuildcommands {
+            "{COPYFILE} %[%{pdbs['sfml']}/*.pdb] %[%{!cfg.objdir}]",
         }
 
 	filter {"system:windows", "configurations:Release"}

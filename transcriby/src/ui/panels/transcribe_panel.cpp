@@ -12,6 +12,7 @@ namespace transcriby::ui {
 
 	void TranscribePanel::on_render() {
 		ImGui::Begin("Transcribe");
+
 		if (_playlist.has_selected()) {
 			auto selected = _playlist.get_selected();
 
