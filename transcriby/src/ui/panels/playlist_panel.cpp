@@ -39,8 +39,9 @@ namespace transcriby::ui {
 	void PlaylistPanel::_show_tracks() {
 		for (uint id = 0; id < _playlist.get_content().size(); ++id) {
 			ImGui::PushID(id);
-			TrackSource track = _playlist.get_content().at(id);
-			std::string track_name = track.filename().string();
+			auto track = _playlist.get_content().at(id);
+			auto source = track.get_source();
+			std::string track_name = source.filename().string();
 
 			uint selected_id = _playlist.get_selected_id();
 			if (ImGui::Selectable(track_name.c_str(), selected_id == id)) {

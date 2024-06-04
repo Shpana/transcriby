@@ -24,8 +24,9 @@ namespace transcriby::ui {
 
 	void PlayerPanel::_put_selected_track() {
 		if (_playlist.has_selected()) {
-			if (_turntable.get_putted() != _playlist.get_selected())
-				_turntable.put(_playlist.get_selected());
+			auto source = _playlist.get_selected().get_source();
+			if (_turntable.get_putted() != source)
+				_turntable.put(source);
 		} else {
 			if (_turntable.has_putted())
 				_turntable.extract();
@@ -33,7 +34,7 @@ namespace transcriby::ui {
 	}
 
 	void PlayerPanel::_show_playing_track() {
-		auto& track = _turntable.get_putted();
+		auto track = _turntable.get_putted();
 		std::string title = u8"Сейчас игарет..." + track.filename().string();
 		ImGui::Text(title.c_str());
 	}

@@ -1,12 +1,14 @@
 #include "playlist.h"
 
 namespace transcriby {
-	void Playlist::add(const TrackSource& track) {
-		if (std::find(_content.begin(), _content.end(), track) == _content.end())
-			_content.push_back(track);
+	void Playlist::add(const Track& track) {
+		_content.push_back(track);
 	}
 
 	void Playlist::remove(uint id) {
+		on_removing_event.notify(_content[id]);
+		if (_selected_id > id)
+			_selected_id--;
 		if (_selected_id == id)
 			unselect();
 		_content.erase(_content.begin() + id);
@@ -22,5 +24,13 @@ namespace transcriby {
 
 	bool Playlist::has_selected() {
 		return _selected_id != -1;
+	}
+
+	void Playlist::change_state(uint id, TranscribtionState state) {
+		_content[id].set_state(state);
+	}
+
+	void Playlist::change_transcription(uint id, const std::string& transcription) {
+		_content[id].set_transcription(transcription);
 	}
 }

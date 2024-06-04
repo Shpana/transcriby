@@ -12,19 +12,19 @@ namespace transcriby {
 			sf::VideoMode(_resolution.x, _resolution.y), title
 		);
 
-		_playlist.add("C:/Dev/transcriby/transcriby/assets/audio/1.mp3");
-		_playlist.add("C:/Dev/transcriby/transcriby/assets/audio/2.mp3");
+		_playlist.add({ "C:/Dev/transcriby/transcriby/assets/audio/1.mp3" });
+		_playlist.add({ "C:/Dev/transcriby/transcriby/assets/audio/2.mp3" });
 
 		_playlist_panel = std::make_unique<ui::PlaylistPanel>(_playlist);
 		_player_panel = std::make_unique<ui::PlayerPanel>(_playlist);
 		_transcribe_panel = std::make_unique<ui::TranscribePanel>(_playlist);
 	}
 
-	Application::~Application() {}
+	Application::~Application() {
+	}
 
 	void Application::run() {
 		_window->setFramerateLimit(_frame_rate);
-		_window->resetGLStates();
 
 		ImGui::SFML::Init(*_window);
 		{

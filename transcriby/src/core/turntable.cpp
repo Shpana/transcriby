@@ -7,8 +7,6 @@ namespace transcriby {
 
 	Turntable::~Turntable() {
 		_engine->drop();
-		if (_sound)
-			_sound->drop();
 	}
 
 	void Turntable::put(const TrackSource& source) {

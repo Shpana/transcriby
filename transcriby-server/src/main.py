@@ -5,7 +5,7 @@ from flask import Flask, request
 UPLOADS_FOLDER = "C:\\Dev\\transcriby\\transcriby-server\\.uploads"
 
 app = Flask(__name__)
-model = whisper.load_model("large-v3", "cpu")
+model = whisper.load_model("base", "cpu")
 
 
 @app.post("/")
