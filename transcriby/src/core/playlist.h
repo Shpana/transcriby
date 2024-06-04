@@ -21,6 +21,7 @@ namespace transcriby {
 		void change_transcription(uint id, const std::string& transcription);
 
 		Event<Track> on_removing_event;
+		uint get_track_id(const Track& track);
 		uint get_selected_id() { return _selected_id; }
 		const Track& get_selected() { return _content.at(_selected_id); }
 		const std::vector<Track>& get_content() { return _content; }

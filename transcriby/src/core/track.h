@@ -16,6 +16,9 @@ namespace transcriby {
 	public:
 		Track(const TrackSource& source);
 
+		bool operator==(const Track& other) {
+			return other._source == _source;
+		}
 
 		void set_transcription(const std::string& transcription);
 		void set_state(const TranscribtionState& state);

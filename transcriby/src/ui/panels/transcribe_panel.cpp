@@ -9,9 +9,12 @@ using namespace std::chrono_literals;
 namespace transcriby::ui {
 	TranscribePanel::TranscribePanel(Playlist& playlist) 
 		: _playlist(playlist) {
-		_playlist.on_removing_event.add_listener([](const Track& track) {
-			std::cout << track.get_source().string() << std::endl;
-		});
+		_playlist.on_removing_event.add_listener([&](const Track& track) {
+				if (_current_id == _playlist.get_track_id(track)) {
+					_playlist.change_state(_current_id, TranscribtionState::None);
+					_current_id = -1;
+				}
+			});
 	}
 
 	void TranscribePanel::on_render() {
@@ -47,9 +50,11 @@ namespace transcriby::ui {
 		// BUG: Handle server errors  
 		if (_transcriber_task.valid()) {
 			if (_transcriber_task.wait_for(0s) == std::future_status::ready) {
-				_playlist.change_transcription(_current_id, _transcriber_task.get());
-				_playlist.change_state(_current_id, TranscribtionState::Ready);
-				_current_id = -1;
+				if (_current_id != -1) {
+					_playlist.change_transcription(_current_id, _transcriber_task.get());
+					_playlist.change_state(_current_id, TranscribtionState::Ready);
+					_current_id = -1;
+				}
 			}
 		}
 	}

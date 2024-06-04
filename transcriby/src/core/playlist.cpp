@@ -33,4 +33,9 @@ namespace transcriby {
 	void Playlist::change_transcription(uint id, const std::string& transcription) {
 		_content[id].set_transcription(transcription);
 	}
+
+	uint Playlist::get_track_id(const Track& track) {
+		auto it = std::find(_content.begin(), _content.end(), track);
+		return static_cast<uint>(it - _content.begin());
+	}
 }
