@@ -1,8 +1,10 @@
 /.vs
 /bin
 /bin-int
+**/.local
 
 imgui.ini
+**.exe
 **.sln
 **.vcxproj
 **.vcxproj.user

@@ -28,10 +28,12 @@ namespace transcriby {
 
 	void Playlist::change_state(uint id, TranscribtionState state) {
 		_content[id].set_state(state);
+		if (state == TranscribtionState::None)
+			_content[id].clear_transcribtion();
 	}
 
-	void Playlist::change_transcription(uint id, const std::string& transcription) {
-		_content[id].set_transcription(transcription);
+	void Playlist::add_passage_transcribtion(uint id, const Passage& transcribtion) {
+		_content[id].add_passage_transcribtion(transcribtion);
 	}
 
 	uint Playlist::get_track_id(const Track& track) {
@@ -39,3 +41,4 @@ namespace transcriby {
 		return static_cast<uint>(it - _content.begin());
 	}
 }
+

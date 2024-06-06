@@ -9,12 +9,16 @@ namespace transcriby {
 		return _state == TranscribtionState::Ready;
 	}
 
-	void Track::set_transcription(const std::string& transcription) {
-		_transcription = transcription;
+	void Track::clear_transcribtion() {
+		_transcribtion.clear();
 	}
 
 	void Track::set_state(const TranscribtionState& state) {
 		_state = state;
+	}
+
+	void Track::add_passage_transcribtion(const Passage& passage) {
+		_transcribtion.push_back(passage);
 	}
 }
 

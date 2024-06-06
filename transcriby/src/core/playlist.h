@@ -18,7 +18,7 @@ namespace transcriby {
 		void unselect();
 		bool has_selected();
 		void change_state(uint id, TranscribtionState state);
-		void change_transcription(uint id, const std::string& transcription);
+		void add_passage_transcribtion(uint id, const Passage& transcribtion);
 
 		Event<Track> on_removing_event;
 		uint get_track_id(const Track& track);

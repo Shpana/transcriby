@@ -2,10 +2,10 @@ import os
 import whisper
 from flask import Flask, request
 
-UPLOADS_FOLDER = "C:\\Dev\\transcriby\\transcriby-server\\.uploads"
+UPLOADS_FOLDER = "C:\\Dev\\transcriby\\transcriby-server\\.local"
 
 app = Flask(__name__)
-model = whisper.load_model("base", "cpu")
+model = whisper.load_model("large-v3", "cpu")
 
 
 @app.post("/")
