@@ -43,8 +43,17 @@ namespace transcriby::ui {
 			auto source = track.get_source();
 			std::string track_name = source.filename().string();
 
+			std::string state;
+			if (track.get_state() == TranscribtionState::InQueue) {
+				state = u8" (В очереди...)";
+			} else if (track.get_state() == TranscribtionState::InProgress) {
+				state = u8" (В обработке...)";
+			} else if (track.get_state() == TranscribtionState::Ready) {
+				state = u8" (Готово)";
+			}
+
 			uint selected_id = _playlist.get_selected_id();
-			if (ImGui::Selectable(track_name.c_str(), selected_id == id)) {
+			if (ImGui::Selectable((track_name + state).c_str(), selected_id == id)) {
 				if (selected_id == id)
 					_playlist.unselect();
 				else
