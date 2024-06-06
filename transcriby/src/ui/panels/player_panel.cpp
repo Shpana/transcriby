@@ -6,6 +6,7 @@
 #include "imgui.h"
 
 #include "ui/primitives.h"
+#include "utils/convert_seconds_to_time_string.h"
 
 namespace transcriby::ui {
 	PlayerPanel::PlayerPanel(Playlist& playlist)
@@ -49,8 +50,10 @@ namespace transcriby::ui {
 			_turntable.set_playback_speed(info.playback_speed);
 
 		float position = (float)info.position / info.length;
-		if (ImGui::SliderFloat(u8"Позиция", &position, 0.0f, 1.0f))
+		std::string time_view = convert_seconds_to_time_string(info.position / 1000);
+		if (ImGui::SliderFloat(time_view.c_str(), &position, 0.0f, 1.0f)) {
 			_turntable.set_position(position);
+		}
 
 		if (info.is_paused) {
 			if (standart_button(u8"Играть"))
