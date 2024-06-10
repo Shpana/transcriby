@@ -12,15 +12,14 @@ namespace transcriby {
 			sf::VideoMode(_resolution.x, _resolution.y), title
 		);
 
-		_playlist.add({ "C:/Dev/transcriby/transcriby/assets/audio/1.mp3" });
-		_playlist.add({ "C:/Dev/transcriby/transcriby/assets/audio/2.mp3" });
-
-		_playlist_panel = std::make_unique<ui::PlaylistPanel>(_playlist);
-		_player_panel = std::make_unique<ui::PlayerPanel>(_playlist);
-		_transcribe_panel = std::make_unique<ui::TranscribePanel>(_playlist);
+		_panels.push_back(new ui::PlaylistPanel(_playlist));
+		_panels.push_back(new ui::PlayerPanel(_playlist));
+		_panels.push_back(new ui::TranscriberPanel(_playlist));
 	}
 
 	Application::~Application() {
+		for (auto panel : _panels)
+			delete panel;
 	}
 
 	void Application::run() {
@@ -49,9 +48,8 @@ namespace transcriby {
 		ImGui::PushFont(_font);
 		{
 			_handle_dockspace([&]() {
-				_playlist_panel->on_render();
-				_player_panel->on_render();
-				_transcribe_panel->on_render();
+				for (auto panel : _panels)
+					panel->on_render();
 			});
 		}
 		ImGui::PopFont();

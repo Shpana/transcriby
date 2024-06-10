@@ -62,8 +62,10 @@ namespace transcriby {
 		if (_transcriber_task.valid()) {
 			if (_transcriber_task.wait_for(0s) == std::future_status::ready) {
 				_playlist.add_passage_transcribtion(_current_id, _transcriber_task.get());
-				if (_for_transcribtion.empty())
+				if (_for_transcribtion.empty()) {
+					_playlist.change_state(_current_id, TranscribtionState::Ready);
 					_current_id = -1;
+				}
 			}
 		}
 	}
