@@ -13,7 +13,7 @@ namespace transcriby::ui {
 	void PlayerPanel::on_render() {
 		_put_selected_track();
 		
-		ImGui::Begin(u8"Проигрыватель");
+		ImGui::Begin("Player");
 		if (_turntable.has_putted()) {
 			_show_playing_track();
 			_show_track_execution_configs();
@@ -34,17 +34,17 @@ namespace transcriby::ui {
 
 	void PlayerPanel::_show_playing_track() {
 		auto track = _turntable.get_putted();
-		std::string title = u8"Сейчас игарет..." + track.filename().string();
+		std::string title = "Now playing..." + track.filename().string();
 		ImGui::Text(title.c_str());
 	}
 
 	void PlayerPanel::_show_track_execution_configs() {
 		auto info = _turntable.get_info();
 
-		if (ImGui::SliderFloat(u8"Звук", &info.volume, 0.0f, 1.0f))
+		if (ImGui::SliderFloat("Volume", &info.volume, 0.0f, 1.0f))
 			_turntable.set_volume(info.volume);
 
-		if (ImGui::DragFloat(u8"Скорость", &info.playback_speed, 0.1, 0.0f, 3.0f))
+		if (ImGui::DragFloat("Play speed", &info.playback_speed, 0.1, 0.0f, 3.0f))
 			_turntable.set_playback_speed(info.playback_speed);
 
 		float position = (float)info.position / info.length;
@@ -54,11 +54,11 @@ namespace transcriby::ui {
 		}
 
 		if (info.is_paused) {
-			if (standart_button(u8"Играть"))
+			if (standart_button("Play"))
 				_turntable.play();
 		}
 		else {
-			if (standart_button(u8"Пауза"))
+			if (standart_button("Pause"))
 				_turntable.pause();
 		}
 	}
@@ -69,13 +69,13 @@ namespace transcriby::ui {
 
 	PlaylistPanel::PlaylistPanel(Playlist& playlist)
 		: _playlist(playlist) {
-		_add_track_dialog.SetTitle(u8"Выберите файл");
-		_add_track_dialog.SetTypeFilters({ ".mp3", ".m4a"});
+		_add_track_dialog.SetTitle("Choose file...");
+		_add_track_dialog.SetTypeFilters({ ".mp3" });
 	}
 
 	void PlaylistPanel::on_render() {
 		{
-			ImGui::Begin(u8"Плейлист");
+			ImGui::Begin("Playlist");
 			_show_tracks();
 			ImGui::Separator();
 			_show_add_track_dialog();
@@ -91,7 +91,7 @@ namespace transcriby::ui {
 	}
 
 	void PlaylistPanel::_show_add_track_dialog() {
-		if (standart_button(u8"Добавить трек")) {
+		if (standart_button("Add track")) {
 			_add_track_dialog.Open();
 		}
 	}
@@ -105,11 +105,11 @@ namespace transcriby::ui {
 
 			std::string state;
 			if (track.get_state() == TranscribtionState::InQueue) {
-				state = u8" (В очереди...)";
+				state = " (in queue...)";
 			} else if (track.get_state() == TranscribtionState::InProgress) {
-				state = u8" (В обработке...)";
+				state = " (in progress...)";
 			} else if (track.get_state() == TranscribtionState::Ready) {
-				state = u8" (Готово)";
+				state = u8" (ready)";
 			}
 
 			uint selected_id = _playlist.get_selected_id();
@@ -126,8 +126,8 @@ namespace transcriby::ui {
 
 	void PlaylistPanel::_show_track_manipulation_popup(uint id) {
 		if (ImGui::BeginPopupContextItem("track_manipulation")) {
-			ImGui::SeparatorText(u8"Действия");
-			if (standart_button(u8"Убрать")) {
+			ImGui::SeparatorText("Actions");
+			if (standart_button("Remove")) {
 				_playlist.remove(id);
 				ImGui::CloseCurrentPopup();
 			}
@@ -143,9 +143,9 @@ namespace transcriby::ui {
 		: _playlist(playlist), _transcriber(playlist) {}
 
 	void TranscriberPanel::on_render() {
-		ImGui::Begin(u8"Расшифровщик");
+		ImGui::Begin("Transcriber");
 		if (_playlist.has_selected()) {
-			if (standart_button(u8"Расшифровать")) {
+			if (standart_button("Transcribe")) {
 				uint id = _playlist.get_selected_id();
 				_transcriber.add(id);
 				_playlist.change_state(id, TranscribtionState::InQueue);

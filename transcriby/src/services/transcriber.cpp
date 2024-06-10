@@ -16,6 +16,9 @@ namespace transcriby {
 					_current_id = -1;
 				}
 			});
+
+		if (!std::filesystem::is_directory(_local_path))
+			std::filesystem::create_directory(_local_path);
 	}
 
 	void TranscriberService::add(uint id) {
@@ -86,11 +89,11 @@ namespace transcriby {
 		std::vector<TrackPassage> result;
 
 		std::hash<std::string> hasher;
-		std::string path = "C:/Dev/transcriby/transcriby/.local/" + std::to_string(hasher(source.string()));
+		std::string path = _local_path + std::to_string(hasher(source.string()));
 		std::filesystem::create_directory(path);
 		std::string command =
 			"ffmpeg -i " + source.string() + " -f segment -segment_time " 
-				+ std::to_string(gap) + " -c copy " + path + "/%03d.mp3";
+				+ std::to_string(gap) + " -c copy " + path + "\\%03d.mp3";
 		system(command.c_str());
 		int i = 0;
 		for (const auto& entry : std::filesystem::directory_iterator(path)) {

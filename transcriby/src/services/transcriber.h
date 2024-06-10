@@ -27,6 +27,8 @@ namespace transcriby {
 		Playlist& _playlist;
 		const std::string _service_url = "http://127.0.0.1:5000";
 
+		const std::string _local_path = ".\\.local\\";
+
 		std::vector<uint> _queue;
 		uint _current_id = -1;
 

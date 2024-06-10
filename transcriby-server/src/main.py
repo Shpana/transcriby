@@ -2,7 +2,11 @@ import os
 import whisper
 from flask import Flask, request
 
-UPLOADS_FOLDER = "C:\\Dev\\transcriby\\transcriby-server\\.local"
+UPLOADS_FOLDER = ".\\.local"
+
+if not os.path.isdir(UPLOADS_FOLDER):
+    os.mkdir(UPLOADS_FOLDER)
+
 
 app = Flask(__name__)
 model = whisper.load_model("base", "cpu")
